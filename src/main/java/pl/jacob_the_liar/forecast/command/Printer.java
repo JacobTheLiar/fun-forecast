@@ -5,7 +5,7 @@ import pl.jacob_the_liar.forecast.seven_timer.civil.SevenTimerForecast;
 
 import static pl.jacob_the_liar.forecast.utils.MyUtils.assigned;
 
-public class Printer {
+public class Printer implements IPrinter{
 
     private static final String DATA_PATTERN =
             "time point: %3d; cloud cover: %1d; lift index: %3d; precipitation: %4s(%1d); temp: %2d; humidity: %4s; wind: %2d(%2s); icon: %s";
