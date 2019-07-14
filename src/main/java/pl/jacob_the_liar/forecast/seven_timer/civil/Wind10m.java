@@ -1,5 +1,5 @@
 
-package pl.jacob_the_liar.forecast.seven_timer;
+package pl.jacob_the_liar.forecast.seven_timer.civil;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
