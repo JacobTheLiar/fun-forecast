@@ -14,7 +14,8 @@ public class App
     {
         System.out.println( "Fun - Forecast" );
 
-        IUrl url = new UrlCivil(17.3, 52.2);
+//        IUrl url = new UrlCivil(17.3, 52.2);
+        IUrl url = new UrlCivil(15.9, 50.8);
 
         ForecastManager forecastManager = new ForecastManager();
 

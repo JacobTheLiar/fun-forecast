@@ -4,11 +4,12 @@ import pl.jacob_the_liar.forecast.seven_timer.civil.Dataseries;
 import pl.jacob_the_liar.forecast.seven_timer.civil.SevenTimerForecast;
 
 import static pl.jacob_the_liar.forecast.utils.MyUtils.assigned;
+import static pl.jacob_the_liar.forecast.utils.SevenTimerTranslator.*;
 
 public class Printer implements IPrinter{
 
     private static final String DATA_PATTERN =
-            "time point: %3d; cloud cover: %1d; lift index: %3d; precipitation: %4s(%1d); temp: %2d; humidity: %4s; wind: %2d(%2s); icon: %s";
+            "time point: %7s; cloud cover: %8s; lift index: %17s; precipitation: %4s(%8s); temp: %2d; humidity: %4s; wind: %12s(%2s); icon: %s";
 
     private SevenTimerForecast forecast;
 
@@ -20,18 +21,20 @@ public class Printer implements IPrinter{
         if (assigned(forecast)) {
             System.out.print("init: ");
 
-            System.out.println(forecast.getInit());
+            String init = forecast.getInit();
+
+            System.out.println(init);
 
             for (Dataseries item : forecast.getDataseries()) {
                 System.out.println(String.format(DATA_PATTERN,
-                        item.getTimepoint(),
-                        item.getCloudcover(),
-                        item.getLiftedIndex(),
+                        time(init, item.getTimepoint()),
+                        cloudCover(item.getCloudcover()),
+                        liftedIndexString(item.getLiftedIndex()),
                         item.getPrecType(),
-                        item.getPrecAmount(),
+                        precipitationAmount(item.getPrecAmount()),
                         item.getTemp2m(),
                         item.getRh2m(),
-                        item.getWind10m().getSpeed(),
+                        windSpeed(item.getWind10m().getSpeed()),
                         item.getWind10m().getDirection(),
                         item.getWeather()
 
