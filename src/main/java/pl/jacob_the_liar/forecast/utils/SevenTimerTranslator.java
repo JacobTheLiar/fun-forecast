@@ -1,17 +1,16 @@
 package pl.jacob_the_liar.forecast.utils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Locale;
+
+import static pl.jacob_the_liar.forecast.utils.MyUtils.dateTimeToString;
+import static pl.jacob_the_liar.forecast.utils.MyUtils.stringToDateTime;
+
 
 public class SevenTimerTranslator {
 
-    public static String cloudCover(int value){
+    public static String cloudCover(int value) {
 
-        switch (value){
+        switch (value) {
             case 1:
                 return "0-6%";
             case 2:
@@ -30,14 +29,15 @@ public class SevenTimerTranslator {
                 return "81-94%";
             case 9:
                 return "94-100%";
-            default: return "n/a";
+            default:
+                return "n/a";
         }
 
     }
 
-    public static String liftedIndex(int value){
+    public static String liftedIndex(int value) {
 
-        switch (value){
+        switch (value) {
             case -10:
                 return "below -7";
             case -6:
@@ -62,7 +62,7 @@ public class SevenTimerTranslator {
     }
 
 
-    public static String liftedIndexString(int value){
+    public static String liftedIndexString(int value) {
         // https://en.wikipedia.org/wiki/Lifted_index
         // >6 very stable
         // 2 stable
@@ -71,7 +71,7 @@ public class SevenTimerTranslator {
         // <-6 very unstable
 
 
-        switch (value){
+        switch (value) {
             case -10:
             case -6:
                 return "very unstable";
@@ -88,78 +88,70 @@ public class SevenTimerTranslator {
 
             default:
                 return "n/a";
-        }    }
-
-
-
-        public static String precipitationAmount(int value){
-            switch(value){
-                case 0:
-                    return "---";
-                case 1:
-                    return "<0.25mm";
-                case 2:
-                    return "0.25-1mm";
-                case 3:
-                    return "1-4mm";
-                case 4:
-                    return "4-10mm";
-                case 5:
-                    return "10-16mm";
-                case 6:
-                    return "16-30mm";
-                case 7:
-                    return "30-50mm";
-                case 8:
-                    return "50-75mm";
-                case 9:
-                    return "> 75mm";
-                default:
-                    return "n/a";
-            }
         }
+    }
 
 
-        public static String windSpeed(int value){
-            switch (value){
-
-                case 1:
-                    return "below 0.3m/s";
-                case 2:
-                    return "0.3-3.4m/s";
-                case 3:
-                    return "3.4-8.0m/s";
-                case 4:
-                    return "8.0-10.8m/s";
-                case 5:
-                    return "10.8-17.2m/s";
-                case 6:
-                    return "17.2-24.5m/s";
-                case 7:
-                    return "24.5-32.6m/s";
-                case 8:
-                    return "over 32.6m/s";
-                default:
-                    return "n/a";
-            }
+    public static String precipitationAmount(int value) {
+        switch (value) {
+            case 0:
+                return "---";
+            case 1:
+                return "<0.25mm";
+            case 2:
+                return "0.25-1mm";
+            case 3:
+                return "1-4mm";
+            case 4:
+                return "4-10mm";
+            case 5:
+                return "10-16mm";
+            case 6:
+                return "16-30mm";
+            case 7:
+                return "30-50mm";
+            case 8:
+                return "50-75mm";
+            case 9:
+                return "> 75mm";
+            default:
+                return "n/a";
         }
+    }
 
 
-        public static String time(String init, int timePoint){
+    public static String windSpeed(int value) {
+        switch (value) {
 
-            String fromPattern = "yyyyMMddHH";
-            String toPattern = "dd. HH";
-
-            String result = "";
-
-            DateTimeFormatter initDateFormat = DateTimeFormatter.ofPattern(fromPattern);
-            DateTimeFormatter toDateFormat = DateTimeFormatter.ofPattern(toPattern);
-
-            LocalDateTime initDate = LocalDateTime.parse(init, initDateFormat);
-
-            result = initDate.plusHours(timePoint).format(toDateFormat)+"h";
-
-            return result;
+            case 1:
+                return "below 0.3m/s";
+            case 2:
+                return "0.3-3.4m/s";
+            case 3:
+                return "3.4-8.0m/s";
+            case 4:
+                return "8.0-10.8m/s";
+            case 5:
+                return "10.8-17.2m/s";
+            case 6:
+                return "17.2-24.5m/s";
+            case 7:
+                return "24.5-32.6m/s";
+            case 8:
+                return "over 32.6m/s";
+            default:
+                return "n/a";
         }
+    }
+
+
+    public static String time(String init, int timePoint) {
+        String fromPattern = "yyyyMMddHH";
+        String toPattern = "dd. HH";
+
+        LocalDateTime initDate = stringToDateTime(fromPattern, init);
+
+        return dateTimeToString(toPattern, initDate.plusHours(timePoint)) + "h";
+    }
 
 }
