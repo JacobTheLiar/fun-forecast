@@ -4,5 +4,6 @@ public interface IGeoCoordinates {
 
     double getLongitude();
     double getLatitude();
+    String info();
 
 }

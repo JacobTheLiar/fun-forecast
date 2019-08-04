@@ -9,10 +9,9 @@ import pl.jacob_the_liar.forecast.core.GeoCoordinates;
 
 import static pl.jacob_the_liar.forecast.utils.Input.getString;
 
+
 public class App
 {
-
-
 
     public static void main( String[] args )
     {
@@ -26,10 +25,8 @@ public class App
         IGeoCoordinates stg = new GeoCoordinates(enteredText);
 
         System.out.println("searching forecast for");
-        System.out.println("lat: "+stg.getLatitude());
-        System.out.println("lon: "+stg.getLongitude());
+        System.out.println(stg.info());
 
-//        IUrl url = new UrlCivil(17.3, 52.2);
         IUrl url = new UrlCivil(stg.getLongitude(), stg.getLatitude());
 
         ForecastManager forecastManager = new ForecastManager();

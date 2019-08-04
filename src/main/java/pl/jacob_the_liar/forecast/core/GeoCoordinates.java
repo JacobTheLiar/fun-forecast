@@ -1,20 +1,21 @@
 package pl.jacob_the_liar.forecast.core;
 
-//import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-//@Slf4j
+@Slf4j
 public class GeoCoordinates implements IGeoCoordinates {
 
 
     private double longitude = 15.9;
     private double latitude = 50.8;
     private String geoText;
-
-
+    private String info;
+    
+    
     public GeoCoordinates(String geoText) {
         this.geoText = geoText.trim();
 
@@ -34,8 +35,10 @@ public class GeoCoordinates implements IGeoCoordinates {
         if (coord != null) {
             latitude = coord.getLatitude();
             longitude = coord.getLongitude();
+            info = coord.info();
         } else {
-            //log.error("Coord is null, bad idea");
+            //ExceptionLogger.logException(e);
+            log.error("Coord is null, bad idea");
         }
     }
 
@@ -45,6 +48,7 @@ public class GeoCoordinates implements IGeoCoordinates {
 
         latitude = Double.parseDouble(parts[0].trim());
         longitude = Double.parseDouble(parts[1].trim());
+        info = "place @ "+latitude+","+longitude;
     }
 
 
@@ -72,5 +76,11 @@ public class GeoCoordinates implements IGeoCoordinates {
     @Override
     public double getLatitude() {
         return latitude;
+    }
+    
+    
+    @Override
+    public String info(){
+        return info;
     }
 }
