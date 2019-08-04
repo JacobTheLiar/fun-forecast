@@ -4,6 +4,11 @@ package pl.jacob_the_liar.forecast.geocode.name;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+
+/**
+ * @deprecated
+ * use data from pl.jacob_the_liar.forecast.osm package
+ */
 public class GeocodeFromName {
 
     @SerializedName("standard")

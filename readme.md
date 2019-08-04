@@ -9,8 +9,8 @@ użyto darmowego api
 do prognozy pogody 
 <http://www.7timer.info/doc.php?lang=en>
 
-do pobrania koordynatów miejscowości
-<https://geocode.xyz/api>
+do pobrania koordynatów miejscowości lub informacji o miejscu
+<https://nominatim.org/release-docs/develop/api/Search/>
 
 ## class generator
 do wygenerowania klas z danych zwracanych z API użyto

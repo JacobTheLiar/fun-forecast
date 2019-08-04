@@ -2,9 +2,11 @@ package pl.jacob_the_liar.forecast.utils;
 
 import java.util.Scanner;
 
+
 public class Input {
 
-    public static String getString(){
+
+    public static String getString() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print(">");

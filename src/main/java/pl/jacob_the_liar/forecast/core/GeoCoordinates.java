@@ -1,14 +1,19 @@
 package pl.jacob_the_liar.forecast.core;
 
+//import lombok.extern.slf4j.Slf4j;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+//@Slf4j
 public class GeoCoordinates implements IGeoCoordinates {
 
 
     private double longitude = 15.9;
     private double latitude = 50.8;
     private String geoText;
+
 
     public GeoCoordinates(String geoText) {
         this.geoText = geoText.trim();
@@ -17,8 +22,8 @@ public class GeoCoordinates implements IGeoCoordinates {
             parseGeoCords();
         else
             parseFromLocation();
-
     }
+
 
     private void parseFromLocation() {
         IUrl url = new UrlGeo(geoText);
@@ -26,10 +31,14 @@ public class GeoCoordinates implements IGeoCoordinates {
 
         IGeoCoordinates coord = manager.getCoordinates(url);
 
-        latitude = coord.getLatitude();
-        longitude = coord.getLongitude();
-
+        if (coord != null) {
+            latitude = coord.getLatitude();
+            longitude = coord.getLongitude();
+        } else {
+            //log.error("Coord is null, bad idea");
+        }
     }
+
 
     private void parseGeoCords() {
         String[] parts = geoText.split(",");
@@ -37,6 +46,7 @@ public class GeoCoordinates implements IGeoCoordinates {
         latitude = Double.parseDouble(parts[0].trim());
         longitude = Double.parseDouble(parts[1].trim());
     }
+
 
     private boolean isGeoCoords() {
         //https://www.regexplanet.com/advanced/java/index.html
@@ -52,10 +62,12 @@ public class GeoCoordinates implements IGeoCoordinates {
         return result;
     }
 
+
     @Override
     public double getLongitude() {
         return longitude;
     }
+
 
     @Override
     public double getLatitude() {
